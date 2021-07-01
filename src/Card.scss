@@ -5,21 +5,46 @@
     align-items: center;
     border-radius: 5px;
     box-shadow:5px 5px 10px rgb(141, 139, 139);
-    margin-bottom: 15px;
+    margin: 15px;
     width: 250px;
 
     &__header{
         height: 30px;
-        background-color: rgb(73, 87, 207);
+        background-color: rgb(0, 176, 179);
         font-weight: bold;
-        padding-bottom: 5px;
+        padding-bottom: 20px;
         width: 100%;
         text-align: center;
         color: white;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
         
     }
 
     &__body {
+        &-sub {
+            display: flex;
+        }
+        &-star {
+            width: 25px;
+            margin-right: 12px;
+        }
+    }
 
+    &__footer {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding-top: 4px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border: none;
+
+        &:hover {
+            background-color:rgb(239, 239, 239)
+        }
+        &-caret {
+            width: 15px;
+        }
     }
 }
