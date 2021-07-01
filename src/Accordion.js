@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import './Accordion.scss';
+import Commit from './Commit'
 
 const Accordion = (props) => {
-    const [isActive, setIsActive] = useState(false);
+    console.log(props)
     return (
         <>
             <div className="accordion">
-                <h3>{props.title}</h3>
-                <div>{props.content}</div>
+                <ul>
+                    {props.commitData?.map((commit) => {
+                        return <Commit commit={commit} />
+                    })}
+                </ul>
             </div>
         </>
     )
