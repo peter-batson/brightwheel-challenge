@@ -1,18 +1,20 @@
 import './Card.scss'
 import Accordion from './Accordion'
-import { useCallback, useState } from 'react';
-import axios from 'axios';
-import { useQuery } from 'react-query'
+import { useState } from 'react';
 
 function Card({repo, getRepoCommitData}) {
-    const GITHUB_URL = 'https://api.github.com/';
     const [isActive, setIsActive] = useState(false);
     const [clicked, setClicked] = useState(false)
-    if (!isActive && clicked) {
-        console.log(isActive, clicked)
-        getRepoCommitData(repo.owner, repo.name)
-    }
 
+    async function handleAccordionClick() {
+        console.log('handling click')
+        await setClicked(true);
+        await setIsActive(!isActive);
+        if (clicked && isActive) {
+            getRepoCommitData(repo.owner, repo.name)
+        }
+    }
+ 
     return (
         <div className="card" key={repo.id}>
             <div className="card__header">
@@ -25,7 +27,7 @@ function Card({repo, getRepoCommitData}) {
                     <p>{repo.stars}</p>
                 </div>
             </div>
-            <button className="card__footer" onClick={() =>  {setIsActive(!isActive); setClicked(true)}}>
+            <button className="card__footer" onClick={() => handleAccordionClick()}>
                 { isActive 
                     ? <div>
                         <img className="card__footer-caret" src="caret-up.svg"></img>

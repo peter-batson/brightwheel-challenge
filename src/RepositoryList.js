@@ -42,6 +42,7 @@ const RepositoryList = () => {
     // })
 
     async function getRepoCommitData(owner, repo) {
+        console.log(owner, repo)
         commits.refetch();
         try {
              const response = await axios(`${GITHUB_URL}repos/${owner}/${repo}/commits`)
