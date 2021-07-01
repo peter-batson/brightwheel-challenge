@@ -1,0 +1,25 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow:5px 5px 10px rgb(141, 139, 139);
+    margin-bottom: 15px;
+    width: 250px;
+
+    &__header{
+        height: 30px;
+        background-color: rgb(73, 87, 207);
+        font-weight: bold;
+        padding-bottom: 5px;
+        width: 100%;
+        text-align: center;
+        color: white;
+        
+    }
+
+    &__body {
+
+    }
+}
