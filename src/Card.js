@@ -4,13 +4,10 @@ import { useState } from 'react';
 
 function Card({repo, getRepoCommitData}) {
     const [isActive, setIsActive] = useState(false);
-    const [clicked, setClicked] = useState(false)
 
-    async function handleAccordionClick() {
-        console.log('handling click')
-        await setClicked(true);
-        await setIsActive(!isActive);
-        if (clicked && isActive) {
+    function handleAccordionClick() {
+        setIsActive(!isActive);
+        if (isActive) {
             getRepoCommitData(repo.owner, repo.name)
         }
     }

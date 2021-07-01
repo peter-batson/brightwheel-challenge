@@ -8,10 +8,6 @@ import Card from './Card';
 const RepositoryList = () => {
     const GITHUB_URL = 'https://api.github.com/';
     const repositories = useQuery('repoData', getTopRepositoryList)
-    const commits = useQuery('commitData', getRepoCommitData, {
-        enabled: false
-    })
-    console.log('repositories',repositories)
     const repositoryList = repositories.data?.items.map((repo) => {
         return {
             id: repo.id,
@@ -42,8 +38,7 @@ const RepositoryList = () => {
     // })
 
     async function getRepoCommitData(owner, repo) {
-        console.log(owner, repo)
-        commits.refetch();
+        console.log('owner', owner, 'repo', repo)
         try {
              const response = await axios(`${GITHUB_URL}repos/${owner}/${repo}/commits`)
              return response.data
