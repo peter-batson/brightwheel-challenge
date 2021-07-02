@@ -1,13 +1,15 @@
 
-
-
-const Commit = (props) => {
-    console.log('commit child',props)
+import './Commit.scss'
+ 
+const Commit = (commit) => {
+    const formattedDate = new Date(commit.commit.date).toString()
     return (
-            <li>
-                <h3>{props.commit?.name}</h3>
-                <div>{props.commit?.date}</div>
-                <div>{props.commit?.message}</div>
+            <li className="commit">
+                <span className="commit__header">
+                    <h3>{commit.commit?.name}</h3>
+                    <div>{formattedDate}</div>
+                </span>
+                <div>{commit.commit?.message}</div>
 
             </li>
     )

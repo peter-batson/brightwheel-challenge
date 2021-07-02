@@ -1,18 +1,6 @@
 import './Card.scss'
-import Accordion from './Accordion'
-import { useState } from 'react';
 
-function Card({repo, getRepoCommitData, commitData}) {
-    console.log('card child',commitData)
-    const [isActive, setIsActive] = useState(false);
-
-    function handleAccordionClick() {
-        setIsActive(!isActive);
-        if (isActive) {
-            getRepoCommitData(repo.owner, repo.name)
-        }
-    }
- 
+function Card({repo}) {
     return (
         <div className="card" key={repo.id}>
             <div className="card__header">
@@ -25,15 +13,6 @@ function Card({repo, getRepoCommitData, commitData}) {
                     <p>{repo.stars}</p>
                 </div>
             </div>
-            <button className="card__footer" onClick={() => handleAccordionClick()}>
-                { isActive 
-                    ? <div>
-                        <img className="card__footer-caret" src="caret-up.svg"></img>
-                        <Accordion isActive={isActive}/>
-                      </div> 
-                    : <img className="card__footer-caret" src="caret-down.svg"></img>}
-                <Accordion isActive={isActive} commitData={commitData}/>
-            </button>
         </div>
     )
 }

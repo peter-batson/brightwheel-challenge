@@ -1,16 +1,22 @@
 import React from "react";
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { useState } from 'react';
 import './RepositoryList.scss';
+import { Link } from "react-router-dom";
+import { css } from "@emotion/react";
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 import Card from './Card';
 
 const RepositoryList = () => {
     const GITHUB_URL = 'https://api.github.com/';
-    const [commitData, setCommitData] = useState([])
-    const repositories = useQuery('repoData', getTopRepositoryList)
-    const repositoryList = repositories.data?.items.map((repo) => {
+    const override = css`
+        display: block;
+        margin: 0 auto;
+        border-color: red;
+        `;
+    const { isLoading, data } = useQuery('repoData', getTopRepositoryList)
+    const repositoryList = data?.items.map((repo) => {
         return {
             id: repo.id,
             owner: repo.owner.login,
@@ -18,11 +24,10 @@ const RepositoryList = () => {
             stars: repo.watchers
         }
     })
-    console.log('repositoryList',repositoryList)
 
     async function getTopRepositoryList() {
         try {
-             const response = await axios(`${GITHUB_URL}search/repositories?q=stars:>=10000&order=desc`)
+             const response = await axios(`${GITHUB_URL}search/repositories?q=stars:>=10000&order=desc&per_page=100`)
              return response.data
         }
         catch(err) {
@@ -30,34 +35,16 @@ const RepositoryList = () => {
         }
     }
 
-    async function getRepoCommitData(owner, repo) {
-        console.log('owner', owner, 'repo', repo)
-        setCommitData([])
-        try {
-             const response = await axios(`${GITHUB_URL}repos/${owner}/${repo}/commits`)
-             console.log('response', response)
-             const commitData = response.data?.map((commit, i) => {
-                    return {
-                        name: commit.commit.author.name,
-                        date: commit.commit.author.date,
-                        message: commit.commit.message
-            
-                    }
-                })
-             setCommitData(commitData)
-             console.log('commitData', commitData)
-        }
-        catch(err) {
-            console.error(err)
-        }
+    if (isLoading){
+        return <PacmanLoader color={"#3f4da7"} loading={isLoading} css={override} size={150} />
     }
 
     return (
         <div className="repositoryList">
-            <h1 className="repositoryList__header">This is a list app</h1>
+            <h1 className="repositoryList__header">Top 100 Github Repositories</h1>
             <div className="repositoryList__body">
                 {repositoryList?.map((repo) => {
-                    return <Card repo={repo} getRepoCommitData={getRepoCommitData} commitData={commitData}/>
+                    return <Link to={`/repo/${repo.owner}/${repo.name}`}><Card repo={repo} /></Link>
                 })}
             </div>
         </div>
