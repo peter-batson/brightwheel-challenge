@@ -8,9 +8,9 @@ You should see a carded list of the top 100 starred Github repositories. If not,
 
 Are you curious about the repo's most recent commit history? Of course you are!
 
-If you want to know what has been changed in the last 24 hours, just click on the repo's card and you'll be show a comprehensive list of the commits from the past 24 hours?
+If you want to know what has been changed, just click on the repo's card and you'll be show a comprehensive list of the commits from the past 24 hours.
 
-Don't see any commits? Don't worry! It's not the gremlins, it's those slacker developers mantaining these projects. You should send them an email or something.
+Don't see any commits? Don't worry! It's not the gremlins this time, it's those slacker developers mantaining these projects. You should send them an email or something.
 
 Anywho, this was a fun project to work on, and I hope I go to talk to you about it and all the things I learned!
 
